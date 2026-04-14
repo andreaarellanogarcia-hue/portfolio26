@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Home</title>
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --line: #e6e6e3;
+      --accent: #222222;
+      --radius: 16px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      width: min(100% - 2.5rem, var(--max-width));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+      background: rgba(247, 247, 245, 0.9);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.95rem 0;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.92rem;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      border-color: var(--text);
+    }
+
+    .hero {
+      padding: 4.5rem 0 3rem;
+    }
+
+    .kicker {
+      display: inline-block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      line-height: 1.1;
+      margin: 0 0 1rem;
+      max-width: 14ch;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 1.35vw, 1.2rem);
+      margin: 0 0 1.75rem;
+      color: #2d2d2d;
+      max-width: 58ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    section {
+      padding: 2.4rem 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .project-card {
+      grid-column: span 4;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      min-height: 280px;
+      display: grid;
+      grid-template-rows: 180px auto;
+    }
+
+    .project-card-link {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      height: 100%;
+    }
+
+    .thumb {
+      background:
+        linear-gradient(135deg, #ececec, #dfdfdf);
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      color: #8a8a8a;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-body h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.04rem;
+    }
+
+    .card-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .about {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+    }
+
+    .about p {
+      margin: 0;
+      color: #2b2b2b;
+      max-width: 72ch;
+    }
+
+    .contact {
+      border-top: 1px solid var(--line);
+      margin-top: 1.5rem;
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .contact-links a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text);
+      font-size: 0.95rem;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 1.25rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .project-card {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 1.4rem, var(--max-width));
+      }
+
+      .header-inner {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 2.6rem;
+      }
+
+      .project-card {
+        grid-column: span 12;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#">Your Name</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="kicker">Portfolio Template</span>
+      <h1>Creative work, carefully crafted.</h1>
+      <p>
+        I design and build visual experiences across illustration, 3D, and photography.
+        This homepage is ready for your projects. Replace the placeholders below with your real work.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#work">View Work</a>
+        <a class="button" href="#contact">Get in Touch</a>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="section-head">
+        <h2>Featured Work</h2>
+        <p>Add your projects here when ready</p>
+      </div>
+      <div class="grid">
+        <article class="project-card">
+          <a class="project-card-link" href="3d-work.html">
+            <div class="thumb">3D Work</div>
+            <div class="card-body">
+              <h3>3D Work</h3>
+              <p>Character design, environments, and digital models.</p>
+            </div>
+          </a>
+        </article>
+        <article class="project-card">
+          <a class="project-card-link" href="2d-work.html">
+            <div class="thumb">2D Work</div>
+            <div class="card-body">
+              <h3>2D Work</h3>
+              <p>Illustration, concept art, and visual storytelling.</p>
+            </div>
+          </a>
+        </article>
+        <article class="project-card">
+          <a class="project-card-link" href="photography.html">
+            <div class="thumb">Photography</div>
+            <div class="card-body">
+              <h3>Photography</h3>
+              <p>Portrait, documentary, and composition studies.</p>
+            </div>
+          </a>
+        </article>
+        <article class="project-card">
+          <a class="project-card-link" href="sculpture.html">
+            <div class="thumb">Sculpture</div>
+            <div class="card-body">
+              <h3>Sculpture</h3>
+              <p>Physical form exploration in mixed materials.</p>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <h2>About</h2>
+      </div>
+      <div class="about">
+        <p>
+          Write a short bio here. Mention your discipline, style, and what kind of projects
+          you love to create. Keep it to 3-5 sentences for a strong first impression.
+        </p>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="section-head">
+        <h2>Contact</h2>
+      </div>
+      <p>Available for freelance, collaborations, and commissions.</p>
+      <div class="contact-links">
+        <a href="mailto:you@example.com">you@example.com</a>
+        <a href="#">Instagram</a>
+        <a href="#">Behance</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container site-footer">
+    © 2026 Your Name. All rights reserved.
+  </footer>
+</body>
+</html>
