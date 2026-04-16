@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "photos/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "DigitalArt/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "3dModel/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "Sculpture/**",
+      "use": "@vercel/static"
+    }
+  ]
+}
